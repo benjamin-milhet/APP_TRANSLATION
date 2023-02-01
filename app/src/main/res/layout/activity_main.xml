@@ -68,56 +68,48 @@
             android:id="@+id/buttonTraduire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#3F51B5"
+            android:backgroundTint="@color/bleu"
             android:text="Traduire" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="332dp"
+        android:layout_height="53dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/buttonTraduction"
+        <ImageButton
+            android:id="@+id/btPagePrincipale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:backgroundTint="#FFFFFF"
-            android:textAlignment="gravity"
-            android:textSize="0sp"
-            app:icon="@android:drawable/ic_menu_mapmode"
-            app:iconGravity="top"
-            app:iconTint="#3F51B5" />
+            android:scaleType="fitCenter"
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_mapmode"
+            app:tint="@color/bleu" />
 
-        <Button
-            android:id="@+id/button2"
+        <ImageButton
+            android:id="@+id/btHistorique"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:backgroundTint="#FFFFFF"
-            android:textSize="0sp"
-            app:icon="@android:drawable/ic_menu_recent_history"
-            app:iconGravity="top"
-            app:iconTint="#3F51B5" />
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_recent_history"
+            app:tint="@color/bleu" />
 
-        <Button
-            android:id="@+id/button3"
+        <ImageButton
+            android:id="@+id/bdParametres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:backgroundTint="#FFFFFF"
-            android:textSize="0sp"
-            app:icon="@android:drawable/ic_menu_manage"
-            app:iconGravity="top"
-            app:iconTint="#3F51B5" />
+            android:scaleType="fitCenter"
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_manage"
+            app:tint="@color/bleu" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

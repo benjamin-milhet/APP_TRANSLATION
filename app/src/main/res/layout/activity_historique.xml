@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".historiqueActivity">
+
+    <LinearLayout
+        android:layout_width="332dp"
+        android:layout_height="53dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btPagePrincipale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_mapmode"
+            app:tint="@color/bleu" />
+
+        <ImageButton
+            android:id="@+id/btHistorique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_recent_history"
+            app:tint="@color/bleu" />
+
+        <ImageButton
+            android:id="@+id/bdParametres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:tintMode="multiply"
+            app:srcCompat="@android:drawable/ic_menu_manage"
+            app:tint="@color/bleu" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
