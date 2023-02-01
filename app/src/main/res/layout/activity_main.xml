@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btPagePrincipale"
+            android:id="@+id/btnPagePrincipale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
             app:tint="@color/bleu" />
 
         <ImageButton
-            android:id="@+id/btHistorique"
+            android:id="@+id/btnHistorique"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -102,7 +102,7 @@
             app:tint="@color/bleu" />
 
         <ImageButton
-            android:id="@+id/bdParametres"
+            android:id="@+id/btnParametres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
