@@ -1,5 +1,6 @@
 package com.milhet.translationapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(intent);
 
         });
+
         btnParametres.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
             MainActivity.this.startActivity(intent);
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     public void translateButton(View view) {
         System.out.println("translateButton");
         Context that = this;
@@ -116,16 +119,16 @@ public class MainActivity extends AppCompatActivity {
 // gestion des erreurs
         } else if (textToTranslate.isEmpty()&& target_lang.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
-            textTraduit.setTextColor(getResources().getColor(R.color.red));
+            textTraduit.setTextColor(that.getColor(R.color.red));
 
 
         }else if (textToTranslate.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire");
-            textTraduit.setTextColor(getResources().getColor(R.color.red));
+            textTraduit.setTextColor(that.getColor(R.color.red));
 
-        }else if (target_lang.isEmpty()) {
+        }else {
         textTraduit.setText("Veuillez entrer une langue de traduction");
-        textTraduit.setTextColor(getResources().getColor(R.color.red));
+        textTraduit.setTextColor(that.getColor(R.color.red));
         }
     }
 
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                             // On affiche la traduction dans le TextView
                             textTraduit.setText(traduction);
-                            textTraduit.setTextColor(getResources().getColor(R.color.black));;
+                            textTraduit.setTextColor(getResources().getColor(R.color.black));
 
 
                             // On cherche le nom de la langue dans la liste des langues disponibles
