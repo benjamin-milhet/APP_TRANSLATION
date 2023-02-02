@@ -1,9 +1,11 @@
 package com.milhet.translationapp.models;
 
+import androidx.annotation.NonNull;
+
 public class Language {
 
-        private String language;
-        private String name;
+        private final String language;
+        private final String name;
 
         public Language(String language, String name) {
             this.language = language;
@@ -15,9 +17,10 @@ public class Language {
         public String getName() {
             return name;
         }
-
+        @NonNull
+        @Override
         public String toString() {
-            String res = name;// + " (" + language + ")";
-            return  res;}
+            return this.name;
+        }
     }
 
