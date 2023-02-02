@@ -1,18 +1,16 @@
 package com.milhet.translationapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< Updated upstream
-=======
+
 
 import android.widget.ArrayAdapter;
->>>>>>> Stashed changes
+
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-<<<<<<< Updated upstream
-=======
 import com.androidnetworking.AndroidNetworking;
 
 import com.androidnetworking.error.ANError;
@@ -29,9 +27,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
->>>>>>> Stashed changes
 public class MainActivity extends AppCompatActivity {
-
+ String token ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
             MainActivity.this.startActivity(intent);
         });
-<<<<<<< Updated upstream
-=======
+
 
         token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
         loadLanguage();
@@ -86,6 +82,5 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
->>>>>>> Stashed changes
     }
 }
