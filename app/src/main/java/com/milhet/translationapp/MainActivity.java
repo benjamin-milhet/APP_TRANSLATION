@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.androidnetworking.AndroidNetworking;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
  String token ;
  ArrayList<Language> languages = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
+        languages.add(new Language("", ""));
         loadLanguage();
 
     }
@@ -59,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public void loadLanguage() {
 
          Context that = this;
-        AndroidNetworking.get("https://api-free.deepl.com/v2/languages?auth_key=" + token)
+        AndroidNetworking.get("https://api-free.deepl.com/v2/languages")
+                .addHeaders("Authorization", "DeepL-Auth-Key " + token)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
                     @Override
@@ -87,18 +91,95 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
-
+                        System.out.println(anError);
                     }
                 });
     }
 
-    public void translateButton(View view){
+    public void translateButton(View view) {
+        System.out.println("translateButton");
+        Context that = this;
         Spinner spinner = findViewById(R.id.spinnerListeLangue);
-           Language language = (Language) spinner.getSelectedItem();
+        Language language = (Language) spinner.getSelectedItem();
         EditText textATraduire = findViewById(R.id.editTexteATraduire);
-        String text = textATraduire.getText().toString();
-        
 
-        //System.out.println(language.getLanguage());
+        //paramètres de la requête:
+        String textToTranslate = textATraduire.getText().toString();
+        String target_lang = language.getLanguage();
+
+        TextView textTraduit = findViewById(R.id.textViewTexteTraduit);
+        TextView detected_source_language = findViewById(R.id.affichageLangueDetectee);
+
+        if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
+            translate(textToTranslate, target_lang, textTraduit, detected_source_language);
+
+// gestion des erreurs
+        } else if (textToTranslate.isEmpty()&& target_lang.isEmpty()) {
+            textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
+            textTraduit.setTextColor(getResources().getColor(R.color.red));
+
+
+        }else if (textToTranslate.isEmpty()) {
+            textTraduit.setText("Veuillez entrer un texte à traduire");
+            textTraduit.setTextColor(getResources().getColor(R.color.red));
+
+        }else if (target_lang.isEmpty()) {
+        textTraduit.setText("Veuillez entrer une langue de traduction");
+        textTraduit.setTextColor(getResources().getColor(R.color.red));
+        }
+    }
+
+
+    public void translate(String textToTranslate, String target_lang, TextView textTraduit, TextView detected_source_language) {
+        AndroidNetworking.post("https://api-free.deepl.com/v2/translate")
+                .addHeaders("Authorization", "DeepL-Auth-Key " + token)
+                .addBodyParameter("text", textToTranslate)
+                .addBodyParameter("target_lang", target_lang)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String traduction = response.getJSONArray("translations")
+                                    .getJSONObject(0)
+                                    .getString("text");
+                            String langueDetectee = response.getJSONArray("translations")
+                                    .getJSONObject(0)
+                                    .getString("detected_source_language");
+
+                            // On affiche la traduction dans le TextView
+                            textTraduit.setText(traduction);
+                            textTraduit.setTextColor(getResources().getColor(R.color.black));;
+
+
+                            // On cherche le nom de la langue dans la liste des langues disponibles
+                           String detectedLanguageName = "";
+                            for (Language language : languages) {
+                                if (language.getLanguage().equals(langueDetectee)) {
+                                    detectedLanguageName = language.getName();
+                                    break;
+                                }
+                            }
+                            // On affiche le nom de la langue dans le TextView
+                            detected_source_language.setText(detectedLanguageName);
+
+
+
+                        } catch (JSONException e) {
+
+                            System.out.println("exception traduction");
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        System.out.println("erreur traduction");
+                    }
+                });
+
+
+
+
+
     }
 }

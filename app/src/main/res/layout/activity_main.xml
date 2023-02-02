@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#333333"
+    android:textAlignment="textEnd"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="393dp"
-        android:layout_height="436dp"
+        android:layout_width="383dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
@@ -20,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -29,8 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:autoText="false"
                 android:background="@color/teal_700"
-                android:text="Choix de la langue : "
+                android:text=" Choix de la langue : "
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
                 android:textColor="@color/white" />
 
             <Spinner
@@ -73,15 +77,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bleu"
-            android:clickable="true"
+            android:onClick="translateButton"
             android:text="Traduire" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="7dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/teal_700"
+                android:text="Langue détectée :"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/affichageLangueDetectee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
 
         <TextView
             android:id="@+id/textViewTexteTraduit"
             android:layout_width="match_parent"
-            android:layout_height="213dp"
-            android:background="@color/white"
-            android:text="TextView" />
+            android:layout_height="191dp"
+            android:background="@color/white" />
 
     </LinearLayout>
 
