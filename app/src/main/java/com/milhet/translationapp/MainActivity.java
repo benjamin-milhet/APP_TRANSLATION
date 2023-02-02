@@ -3,6 +3,7 @@ package com.milhet.translationapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -32,13 +33,23 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
- String token ;
- ArrayList<Language> languages = new ArrayList<>();
+     String token;
+     SharedPreferences preferencesFile;
+
+     ArrayList<Language> languages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.preferencesFile = getSharedPreferences("API-DEEPL", MODE_PRIVATE);
+        this.token = this.preferencesFile.getString("token", "-1");
+
+        if (this.token.equals("-1")) {
+            Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
 
         final ImageButton btnHistorique = findViewById(R.id.btnHistorique);
         final ImageButton btnParametres = findViewById(R.id.btnParametres);
@@ -55,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
-        languages.add(new Language("", ""));
+        //this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
+        this.languages.add(new Language("", ""));
         loadLanguage();
 
     }
 
     public void loadLanguage() {
+        Context that = this;
 
-         Context that = this;
         AndroidNetworking.get("https://api-free.deepl.com/v2/languages")
                 .addHeaders("Authorization", "DeepL-Auth-Key " + token)
                 .build()
@@ -93,15 +104,19 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
-                        System.out.println(anError);
+                        try {
+                            throw (anError);
+                        } catch (ANError e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
     }
 
     @SuppressLint("SetTextI18n")
     public void translateButton(View view) {
-        System.out.println("translateButton");
         Context that = this;
+
         Spinner spinner = findViewById(R.id.spinnerListeLangue);
         Language language = (Language) spinner.getSelectedItem();
         EditText textATraduire = findViewById(R.id.editTexteATraduire);
@@ -116,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
         if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
             translate(textToTranslate, target_lang, textTraduit, detected_source_language);
 
-// gestion des erreurs
-        } else if (textToTranslate.isEmpty()&& target_lang.isEmpty()) {
+        // gestion des erreurs
+        } else if (textToTranslate.isEmpty() && target_lang.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
             textTraduit.setTextColor(that.getColor(R.color.red));
 
@@ -134,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void translate(String textToTranslate, String target_lang, TextView textTraduit, TextView detected_source_language) {
+        Context that = this;
+
         AndroidNetworking.post("https://api-free.deepl.com/v2/translate")
                 .addHeaders("Authorization", "DeepL-Auth-Key " + token)
                 .addBodyParameter("text", textToTranslate)
@@ -152,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
                             // On affiche la traduction dans le TextView
                             textTraduit.setText(traduction);
-                            textTraduit.setTextColor(getResources().getColor(R.color.black));
+                            textTraduit.setTextColor(that.getColor(R.color.black));
 
 
                             // On cherche le nom de la langue dans la liste des langues disponibles

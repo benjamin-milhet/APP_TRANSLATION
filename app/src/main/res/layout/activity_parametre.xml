@@ -36,7 +36,8 @@
             android:ems="10"
             android:hint="Clef DEEPL"
             android:inputType="textPersonName"
-            android:textColorHint="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="#989696" />
 
         <Button
             android:id="@+id/btnChargerClef"
