@@ -5,30 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-
 import android.view.View;
 import android.widget.ArrayAdapter;
-
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.androidnetworking.AndroidNetworking;
-
 import com.androidnetworking.error.ANError;
-
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.milhet.translationapp.models.Language;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.util.ArrayList;
 
@@ -138,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
             textTraduit.setTextColor(that.getColor(R.color.red));
 
 
-        }else if (textToTranslate.isEmpty()) {
+        } else if (textToTranslate.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire");
             textTraduit.setTextColor(that.getColor(R.color.red));
 
-        }else {
-        textTraduit.setText("Veuillez entrer une langue de traduction");
-        textTraduit.setTextColor(that.getColor(R.color.red));
+        } else {
+            textTraduit.setText("Veuillez entrer une langue de traduction");
+            textTraduit.setTextColor(that.getColor(R.color.red));
         }
     }
 
@@ -172,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
                             textTraduit.setText(traduction);
                             textTraduit.setTextColor(that.getColor(R.color.black));
 
-
                             // On cherche le nom de la langue dans la liste des langues disponibles
                            String detectedLanguageName = "";
                             for (Language language : languages) {
@@ -184,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                             // On affiche le nom de la langue dans le TextView
                             detected_source_language.setText(detectedLanguageName);
 
-
+                            saveTranslation(traduction, detectedLanguageName);
 
                         } catch (JSONException e) {
 
@@ -197,10 +190,39 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("erreur traduction");
                     }
                 });
+    }
 
+    private void saveTranslation(String textTraduit, String langueSource) {
+        SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //on recupere les anciennes transactions
+        StringBuilder langues = new StringBuilder(sharedPreferences.getString("historiqueLangue", ""));
+        StringBuilder traductions = new StringBuilder(sharedPreferences.getString("historiqueTraduction", ""));
 
+        //on ajoute la nouvelle transaction
+        langues.insert(0, langueSource + ";");
+        traductions.insert(0, textTraduit + ";");
+
+        //on limite le nombre de transactions à 10
+        String[] languesArray = langues.toString().split(";");
+        String[] traductionsArray = traductions.toString().split(";");
+
+        if (languesArray.length > 10) {
+            langues = new StringBuilder();
+            traductions = new StringBuilder();
+            for (int i = 0; i < 10; i++) {
+                langues.append(languesArray[i]).append(";");
+                traductions.append(traductionsArray[i]).append(";");
+            }
+        }
+
+        //on sauvegarde les nouvelles transactions
+        editor.putString("historiqueLangue", langues.toString());
+        editor.putString("historiqueTraduction", traductions.toString());
+        editor.apply();
 
 
     }
+
 }
