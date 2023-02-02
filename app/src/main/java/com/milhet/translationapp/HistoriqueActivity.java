@@ -20,5 +20,9 @@ public class HistoriqueActivity extends AppCompatActivity {
             Intent intent = new Intent(HistoriqueActivity.this, MainActivity.class);
             HistoriqueActivity.this.startActivity(intent);
         });
+        btnParametres.setOnClickListener(view -> {
+            Intent intent = new Intent(HistoriqueActivity.this, ParametreActivity.class);
+            HistoriqueActivity.this.startActivity(intent);
+        });
     }
 }
