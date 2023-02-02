@@ -4,65 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="393dp"
+        android:layout_height="436dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Choix de la langue : " />
+                android:background="@color/teal_700"
+                android:text="Choix de la langue : "
+                android:textColor="@color/white" />
 
             <Spinner
                 android:id="@+id/spinnerListeLangue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <View
-            android:id="@+id/divider"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
-            android:background="?android:attr/listDivider"
-            android:backgroundTint="#3F51B5" />
+            android:layout_height="19dp" />
 
         <EditText
             android:id="@+id/editTexteATraduire"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
+            android:background="@color/white"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="Entrez le texte à traduire"
             android:inputType="textMultiLine" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="31dp" />
 
         <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
-            android:background="?android:attr/listDivider"
-            android:backgroundTint="#3F51B5" />
+            android:background="@color/bleu_tres_clair" />
 
-        <TextView
-            android:id="@+id/textViewTexteTraduit"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="19dp" />
 
         <Button
             android:id="@+id/buttonTraduire"
@@ -70,6 +74,13 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bleu"
             android:text="Traduire" />
+
+        <TextView
+            android:id="@+id/textViewTexteTraduit"
+            android:layout_width="match_parent"
+            android:layout_height="213dp"
+            android:background="@color/white"
+            android:text="TextView" />
 
     </LinearLayout>
 
