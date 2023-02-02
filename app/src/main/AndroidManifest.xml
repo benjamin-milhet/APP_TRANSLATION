@@ -14,6 +14,9 @@
         android:theme="@style/Theme.TranslationApp"
         tools:targetApi="31">
         <activity
+            android:name=".ParametreActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoriqueActivity"
             android:exported="false" />
         <activity

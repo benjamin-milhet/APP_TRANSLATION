@@ -87,10 +87,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/bleu"
             android:scaleType="fitCenter"
             android:tintMode="multiply"
             app:srcCompat="@android:drawable/ic_menu_mapmode"
-            app:tint="@color/bleu" />
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/btnHistorique"
