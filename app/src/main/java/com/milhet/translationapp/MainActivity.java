@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.view.View;
 import android.widget.ArrayAdapter;
 
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
  String token ;
+ ArrayList<Language> languages = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             String lName;
                             String lCode;
-                            ArrayList<Language> languages = new ArrayList<>();
+
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject languageI = response.getJSONObject(i);
                                lName = languageI.getString("name");
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             Spinner spinner = findViewById(R.id.spinnerListeLangue);
                             spinner.setAdapter(adapter);
-                            System.out.println(languages.get(1).getLanguage());
+                           // System.out.println(languages.get(1).getLanguage());
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -87,7 +90,15 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+    }
 
+    public void translateButton(View view){
+        Spinner spinner = findViewById(R.id.spinnerListeLangue);
+           Language language = (Language) spinner.getSelectedItem();
+        EditText textATraduire = findViewById(R.id.editTexteATraduire);
+        String text = textATraduire.getText().toString();
+        
 
+        //System.out.println(language.getLanguage());
     }
 }
