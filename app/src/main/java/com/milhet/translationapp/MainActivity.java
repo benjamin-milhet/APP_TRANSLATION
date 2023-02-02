@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadLanguage() {
+
          Context that = this;
         AndroidNetworking.get("https://api-free.deepl.com/v2/languages?auth_key=" + token)
                 .build()
@@ -61,15 +62,21 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            ArrayList<String> languages = new ArrayList<>();
+                            String lName;
+                            String lCode;
+                            ArrayList<Language> languages = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject language = response.getJSONObject(i);
-                                languages.add(language.getString("name"));
+                                JSONObject languageI = response.getJSONObject(i);
+                               lName = languageI.getString("name");
+                                 lCode = languageI.getString("language");
+                                languages.add (new Language( lCode,lName));
+
                             }
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_item, languages);
+                            ArrayAdapter<Language> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_dropdown_item, languages);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             Spinner spinner = findViewById(R.id.spinnerListeLangue);
                             spinner.setAdapter(adapter);
+                            System.out.println(languages.get(1).getLanguage());
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
