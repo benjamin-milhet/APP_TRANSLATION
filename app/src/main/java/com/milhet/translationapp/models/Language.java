@@ -1,4 +1,4 @@
-package com.milhet.translationapp;
+package com.milhet.translationapp.models;
 
 public class Language {
 

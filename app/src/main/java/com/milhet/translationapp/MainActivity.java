@@ -22,6 +22,7 @@ import com.androidnetworking.error.ANError;
 
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.milhet.translationapp.models.Language;
 
 
 import org.json.JSONArray;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         Context that = this;
 
         AndroidNetworking.get("https://api-free.deepl.com/v2/languages")
-                .addHeaders("Authorization", "DeepL-Auth-Key " + token)
+                .addHeaders("Authorization", "DeepL-Auth-Key " + this.token)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
                     @Override
@@ -87,16 +88,16 @@ public class MainActivity extends AppCompatActivity {
 
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject languageI = response.getJSONObject(i);
-                               lName = languageI.getString("name");
-                                 lCode = languageI.getString("language");
-                                languages.add (new Language( lCode,lName));
+                                lName = languageI.getString("name");
+                                lCode = languageI.getString("language");
+                                languages.add(new Language(lCode, lName));
 
                             }
                             ArrayAdapter<Language> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_dropdown_item, languages);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             Spinner spinner = findViewById(R.id.spinnerListeLangue);
                             spinner.setAdapter(adapter);
-                           // System.out.println(languages.get(1).getLanguage());
+
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
