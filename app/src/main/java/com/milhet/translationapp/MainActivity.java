@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
+        this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
         this.languages.add(new Language("", ""));
         loadLanguage();
 
