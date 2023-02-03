@@ -98,14 +98,10 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                             // on ajoute la liste dans le spinner via un adapter
-                            ArrayAdapter<Language> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_dropdown_item, languages);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            Spinner spinner = findViewById(R.id.spinnerListeLangue);
-                            spinner.setAdapter(adapter);
-                            /*SpinnerAdapter adapter = new SpinnerAdapter(that, R.layout.sous_spinner, languages);
+                            SpinnerAdapter adapter = new SpinnerAdapter(that, R.layout.sous_spinner, languages);
                             adapter.setDropDownViewResource(R.layout.sous_spinner);
 
-                            spinnerListeLangue.setAdapter(adapter);*/
+                            spinnerListeLangue.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
