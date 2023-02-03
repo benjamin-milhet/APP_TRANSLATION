@@ -19,6 +19,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.milhet.translationapp.models.Language;
+import com.milhet.translationapp.models.SpinnerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences preferencesFile; // fichier de préférences
     ArrayList<Language> languages = new ArrayList<>(); // liste des langues
 
+    Spinner spinnerListeLangue; // spinner de la liste des langues
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ImageButton btnHistorique = findViewById(R.id.btnHistorique);
         final ImageButton btnParametres = findViewById(R.id.btnParametres);
+        this.spinnerListeLangue = findViewById(R.id.spinnerListeLangue);
 
         btnHistorique.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, HistoriqueActivity.class);
@@ -66,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         //ajout d'une langue vide pour le spinner de la langue source pour eviter de traduire sans que la langue aie été volontairement choisie par l'utilisateur
         this.languages.add(new Language("", ""));
         loadLanguage();
+
+
 
     }
 
@@ -96,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             Spinner spinner = findViewById(R.id.spinnerListeLangue);
                             spinner.setAdapter(adapter);
+                            /*SpinnerAdapter adapter = new SpinnerAdapter(that, R.layout.sous_spinner, languages);
+                            adapter.setDropDownViewResource(R.layout.sous_spinner);
+
+                            spinnerListeLangue.setAdapter(adapter);*/
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
