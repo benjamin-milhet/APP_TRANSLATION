@@ -35,15 +35,15 @@ public class SpinnerAdapter extends ArrayAdapter<Language> {
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull android.view.ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        return getCustomView(position, parent);
     }
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull android.view.ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        return getCustomView(position, parent);
     }
 
-    private View getCustomView(int position, View convertView, ViewGroup parent) {
+    private View getCustomView(int position, ViewGroup parent) {
         //Permet d'avoit une image et un texte dans le spinner
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.sous_spinner, parent, false);
