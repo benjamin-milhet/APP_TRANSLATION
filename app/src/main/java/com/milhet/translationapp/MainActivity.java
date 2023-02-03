@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+
     String token;
     SharedPreferences preferencesFile;
 
@@ -180,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
 
                             saveTranslation(traduction, detectedLanguageName);
 
+
+
                         } catch (JSONException e) {
 
                             System.out.println("exception traduction");
@@ -225,4 +228,54 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    /*
+    public void saveActualTranslate( Traduction traduction){
+        SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //on recupere les anciennes transactions
+        StringBuilder languesSource = new StringBuilder(sharedPreferences.getString("historiqueLangueSource", ""));
+        StringBuilder languesCible = new StringBuilder(sharedPreferences.getString("historiqueLangueCible", ""));
+        StringBuilder textesSource = new StringBuilder(sharedPreferences.getString("historiqueTexteSource", ""));
+        StringBuilder textesCible = new StringBuilder(sharedPreferences.getString("historiqueTexteCible", ""));
+
+        //on ajoute la nouvelle transaction
+        languesSource.insert(0, traduction.getLang_source()+ ";");
+        languesCible.insert(0, traduction.getLang_target()+ ";");
+        textesSource.insert(0, traduction.getText_source()+ ";");
+        textesCible.insert(0, traduction.getText_target()+ ";");
+
+        //on limite le nombre de transactions à 10
+        String[] languesSourceArray = languesSource.toString().split(";");
+        String[] languesCibleArray = languesCible.toString().split(";");
+        String[] textesSourceArray = textesSource.toString().split(";");
+        String[] textesCibleArray = textesCible.toString().split(";");
+
+        if (languesSourceArray.length > 10) {
+            languesSource = new StringBuilder();
+            languesCible = new StringBuilder();
+            textesSource = new StringBuilder();
+            textesCible = new StringBuilder();
+            for (int i = 0; i < 10; i++) {
+                languesSource.append(languesSourceArray[i]).append(";");
+                languesCible.append(languesCibleArray[i]).append(";");
+                textesSource.append(textesSourceArray[i]).append(";");
+                textesCible.append(textesCibleArray[i]).append(";");
+            }
+        }
+
+        //on sauvegarde les nouvelles transactions
+        editor.putString("historiqueLangueSource", languesSource.toString());
+        editor.putString("historiqueLangueCible", languesCible.toString());
+        editor.putString("historiqueTexteSource", textesSource.toString());
+        editor.putString("historiqueTexteCible", textesCible.toString());
+        editor.apply();
+
+
+
+
+
+    }*/
+
+
 }
