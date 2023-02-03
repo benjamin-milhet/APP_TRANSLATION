@@ -48,6 +48,7 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/list_view"
         android:layout_width="300dp"
         android:layout_height="600dp"
         android:layout_marginTop="20dp"

@@ -19,6 +19,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.milhet.translationapp.models.Language;
+import com.milhet.translationapp.models.Traduction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,10 +29,10 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-     String token;
-     SharedPreferences preferencesFile;
+    String token;
+    SharedPreferences preferencesFile;
 
-     ArrayList<Language> languages = new ArrayList<>();
+    ArrayList<Language> languages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
             translate(textToTranslate, target_lang, textTraduit, detected_source_language);
 
-        // gestion des erreurs
+            // gestion des erreurs
         } else if (textToTranslate.isEmpty() && target_lang.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
             textTraduit.setTextColor(that.getColor(R.color.red));
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                             textTraduit.setTextColor(that.getColor(R.color.black));
 
                             // On cherche le nom de la langue dans la liste des langues disponibles
-                           String detectedLanguageName = "";
+                            String detectedLanguageName = "";
                             for (Language language : languages) {
                                 if (language.getLanguage().equals(langueDetectee)) {
                                     detectedLanguageName = language.getName();
@@ -224,5 +225,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 }
