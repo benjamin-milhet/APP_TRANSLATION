@@ -22,7 +22,10 @@ Nous avons effectué une amélioration qui l'ajout des drapeaux des langues de t
 ## Rendu final
 
 ### Page principale
+![alt text](https://github.com/benjamin-milhet/GHYS_MILHET_PROJET_TRANSLATION/blob/main/images/traduction.png?raw=true)
 
 ### Page historique
+![alt text](https://github.com/benjamin-milhet/GHYS_MILHET_PROJET_TRANSLATION/blob/main/images/historique.png?raw=true)
 
 ### Page paramètre
+![alt text](https://github.com/benjamin-milhet/GHYS_MILHET_PROJET_TRANSLATION/blob/main/images/parametre.png?raw=true)
