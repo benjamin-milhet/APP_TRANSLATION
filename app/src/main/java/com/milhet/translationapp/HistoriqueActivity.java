@@ -1,12 +1,18 @@
 package com.milhet.translationapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.milhet.translationapp.models.Traduction;
+
+import java.util.ArrayList;
+
 public class HistoriqueActivity extends AppCompatActivity {
+ArrayList<Traduction> traductions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +30,10 @@ public class HistoriqueActivity extends AppCompatActivity {
             Intent intent = new Intent(HistoriqueActivity.this, ParametreActivity.class);
             HistoriqueActivity.this.startActivity(intent);
         });
+    }
+    public void loadTraductions() {
+        SharedPreferences preferencesFile = getSharedPreferences("API-DEEPL", MODE_PRIVATE);
+
+
     }
 }

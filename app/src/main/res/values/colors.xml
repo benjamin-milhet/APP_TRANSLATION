@@ -10,5 +10,6 @@
     <color name="bleu">#036eba</color>
     <color name="bleu_tres_clair">#7AD5FF</color>
     <color name="red">#FF1100</color>
+    <color name="background_gray">#333333</color>
 
 </resources>

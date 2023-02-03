@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                             // On affiche le nom de la langue dans le TextView
                             detected_source_language.setText(detectedLanguageName);
 
-                            saveTranslation(traduction, detectedLanguageName);
-
+                           // saveTranslation(traduction, detectedLanguageName);
+                           saveActualTranslate(detectedLanguageName,target_lang, textToTranslate, traduction);
 
 
                         } catch (JSONException e) {
@@ -228,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    /*
-    public void saveActualTranslate( Traduction traduction){
+
+    public void saveActualTranslate( String langueSource , String langueCible , String textSource, String textTraduit) {
         SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -240,10 +240,10 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder textesCible = new StringBuilder(sharedPreferences.getString("historiqueTexteCible", ""));
 
         //on ajoute la nouvelle transaction
-        languesSource.insert(0, traduction.getLang_source()+ ";");
-        languesCible.insert(0, traduction.getLang_target()+ ";");
-        textesSource.insert(0, traduction.getText_source()+ ";");
-        textesCible.insert(0, traduction.getText_target()+ ";");
+        languesSource.insert(0, langueSource+ ";");
+        languesCible.insert(0, langueCible+ ";");
+        textesSource.insert(0,textSource + ";");
+        textesCible.insert(0, textTraduit+ ";");
 
         //on limite le nombre de transactions à 10
         String[] languesSourceArray = languesSource.toString().split(";");
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }*/
+    }
 
 
 }
