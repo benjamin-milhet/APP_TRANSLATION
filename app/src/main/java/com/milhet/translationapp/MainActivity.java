@@ -19,7 +19,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.milhet.translationapp.models.Language;
-import com.milhet.translationapp.models.Traduction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
+        //this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
         this.languages.add(new Language("", ""));
         loadLanguage();
 
@@ -270,10 +269,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("historiqueTexteSource", textesSource.toString());
         editor.putString("historiqueTexteCible", textesCible.toString());
         editor.apply();
-
-
-
-
 
     }
 

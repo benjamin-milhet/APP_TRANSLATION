@@ -70,7 +70,6 @@ public class ParametreActivity extends AppCompatActivity {
 
         this.btnChargerClef.setOnClickListener(view -> {
 
-
             if (this.token.equals("-1")) {
                 this.btnPagePrincipale.setEnabled(false);
                 this.btnHistorique.setEnabled(false);
