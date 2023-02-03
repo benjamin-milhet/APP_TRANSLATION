@@ -22,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@color/white"
+            android:background="@drawable/roundedcorner"
             android:orientation="horizontal">
 
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:autoText="false"
-                android:background="@color/teal_700"
+                android:background="@drawable/roundcornerblue"
                 android:text="  Choix de la langue : "
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
@@ -57,7 +57,7 @@
             android:background="@drawable/roundedcorner"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Entrez le texte à traduire"
+            android:hint="  Entrez le texte à traduire"
             android:inputType="textMultiLine" />
 
         <Space
@@ -89,14 +89,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@color/white"
+            android:background="@drawable/roundedcorner"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/teal_700"
+                android:background="@drawable/roundcornerblue"
                 android:text="  Langue détectée :"
                 android:textColor="@color/white"
                 android:textSize="16sp"

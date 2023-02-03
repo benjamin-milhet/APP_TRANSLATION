@@ -46,8 +46,8 @@ TraductionAdapter traductionAdapter;
         Traduction traduction;
 
         for (int i = 0; i < preferencesFile.getInt("nbTransactions", 0); i++) {
-            String langueSource = preferencesFile.getString("historiqueLangueSource" + i, "");
-            String langueCible = preferencesFile.getString("historiqueLangueCible" + i, "");
+            String langueSource = "  " + preferencesFile.getString("historiqueLangueSource" + i, "");
+            String langueCible = "  " + preferencesFile.getString("historiqueLangueCible" + i, "");
             String texteSource = preferencesFile.getString("historiqueTexteSource" + i, "");
             String texteCible = preferencesFile.getString("historiqueTexteCible" + i, "");
             traduction = new Traduction(langueSource, langueCible, texteSource, texteCible);
