@@ -125,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
         TextView detected_source_language = findViewById(R.id.affichageLangueDetectee);
 
         if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
-            translate(textToTranslate, target_lang, textTraduit, detected_source_language);
+            translate(textToTranslate, target_lang, language.getName(), textTraduit, detected_source_language);
 
-            // gestion des erreurs
+        // gestion des erreurs
         } else if (textToTranslate.isEmpty() && target_lang.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
             textTraduit.setTextColor(that.getColor(R.color.red));
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void translate(String textToTranslate, String target_lang, TextView textTraduit, TextView detected_source_language) {
+    public void translate(String textToTranslate, String target_lang, String target_lang_full, TextView textTraduit, TextView detected_source_language) {
         Context that = this;
 
         AndroidNetworking.post("https://api-free.deepl.com/v2/translate")
@@ -178,8 +178,7 @@ public class MainActivity extends AppCompatActivity {
                             // On affiche le nom de la langue dans le TextView
                             detected_source_language.setText(detectedLanguageName);
 
-                           // saveTranslation(traduction, detectedLanguageName);
-                           saveActualTranslate(detectedLanguageName,target_lang, textToTranslate, traduction);
+                            saveTraductions(detectedLanguageName, target_lang_full, textToTranslate, traduction);
 
 
                         } catch (JSONException e) {
@@ -195,81 +194,35 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveTranslation(String textTraduit, String langueSource) {
+    public void saveTraductions(String langueSource, String langueCible, String textSource, String textTraduit) {
         SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        //on recupere les anciennes transactions
-        StringBuilder langues = new StringBuilder(sharedPreferences.getString("historiqueLangue", ""));
-        StringBuilder traductions = new StringBuilder(sharedPreferences.getString("historiqueTraduction", ""));
+        int nbTransactions = sharedPreferences.getInt("nbTransactions", 0);
 
-        //on ajoute la nouvelle transaction
-        langues.insert(0, langueSource + ";");
-        traductions.insert(0, textTraduit + ";");
+        for (int i = 0; i < nbTransactions; i++) {
+            String langueSourceI = sharedPreferences.getString("historiqueLangueSource" + i, "");
+            String langueCibleI = sharedPreferences.getString("historiqueLangueCible" + i, "");
+            String textSourceI = sharedPreferences.getString("historiqueTexteSource" + i, "");
+            String textTraduitI = sharedPreferences.getString("historiqueTexteCible" + i, "");
 
-        //on limite le nombre de transactions à 10
-        String[] languesArray = langues.toString().split(";");
-        String[] traductionsArray = traductions.toString().split(";");
-
-        if (languesArray.length > 10) {
-            langues = new StringBuilder();
-            traductions = new StringBuilder();
-            for (int i = 0; i < 10; i++) {
-                langues.append(languesArray[i]).append(";");
-                traductions.append(traductionsArray[i]).append(";");
+            if (i < 9) {
+                editor.putString("historiqueLangueSource" + (i + 1), langueSourceI);
+                editor.putString("historiqueLangueCible" + (i + 1), langueCibleI);
+                editor.putString("historiqueTexteSource" + (i + 1), textSourceI);
+                editor.putString("historiqueTexteCible" + (i + 1), textTraduitI);
             }
         }
 
-        //on sauvegarde les nouvelles transactions
-        editor.putString("historiqueLangue", langues.toString());
-        editor.putString("historiqueTraduction", traductions.toString());
+        editor.putString("historiqueLangueSource0", langueSource);
+        editor.putString("historiqueLangueCible0", langueCible);
+        editor.putString("historiqueTexteSource0", textSource);
+        editor.putString("historiqueTexteCible0", textTraduit);
+
+        nbTransactions = Math.min(nbTransactions + 1, 10);
+
+        editor.putInt("nbTransactions", nbTransactions);
         editor.apply();
-
-
-    }
-
-    public void saveActualTranslate( String langueSource , String langueCible , String textSource, String textTraduit) {
-        SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        //on recupere les anciennes transactions
-        StringBuilder languesSource = new StringBuilder(sharedPreferences.getString("historiqueLangueSource", ""));
-        StringBuilder languesCible = new StringBuilder(sharedPreferences.getString("historiqueLangueCible", ""));
-        StringBuilder textesSource = new StringBuilder(sharedPreferences.getString("historiqueTexteSource", ""));
-        StringBuilder textesCible = new StringBuilder(sharedPreferences.getString("historiqueTexteCible", ""));
-
-        //on ajoute la nouvelle transaction
-        languesSource.insert(0, langueSource+ ";");
-        languesCible.insert(0, langueCible+ ";");
-        textesSource.insert(0,textSource + ";");
-        textesCible.insert(0, textTraduit+ ";");
-
-        //on limite le nombre de transactions à 10
-        String[] languesSourceArray = languesSource.toString().split(";");
-        String[] languesCibleArray = languesCible.toString().split(";");
-        String[] textesSourceArray = textesSource.toString().split(";");
-        String[] textesCibleArray = textesCible.toString().split(";");
-
-        if (languesSourceArray.length > 10) {
-            languesSource = new StringBuilder();
-            languesCible = new StringBuilder();
-            textesSource = new StringBuilder();
-            textesCible = new StringBuilder();
-            for (int i = 0; i < 10; i++) {
-                languesSource.append(languesSourceArray[i]).append(";");
-                languesCible.append(languesCibleArray[i]).append(";");
-                textesSource.append(textesSourceArray[i]).append(";");
-                textesCible.append(textesCibleArray[i]).append(";");
-            }
-        }
-
-        //on sauvegarde les nouvelles transactions
-        editor.putString("historiqueLangueSource", languesSource.toString());
-        editor.putString("historiqueLangueCible", languesCible.toString());
-        editor.putString("historiqueTexteSource", textesSource.toString());
-        editor.putString("historiqueTexteCible", textesCible.toString());
-        editor.apply();
-
     }
 
 

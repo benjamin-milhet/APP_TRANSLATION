@@ -9,9 +9,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,12 +26,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/teal_700"
-            android:text=" Clef DEEPL : "
-            android:textColor="@color/white" />
+            android:text="  Clef DEEPL : "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editClefDEEPL"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="#2196F3"
@@ -50,9 +54,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,8 +71,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/teal_700"
-            android:text="Niveau d'utilisation de l'API : "
-            android:textColor="@color/white" />
+            android:text="  Niveau d'utilisation de l'API : "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -88,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="/"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/idCaracTotal"
@@ -96,7 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="1"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>

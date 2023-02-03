@@ -1,12 +1,8 @@
 package com.milhet.translationapp;
 
-import static com.milhet.translationapp.R.id.listView;
-
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -26,7 +22,7 @@ SharedPreferences preferencesFile;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historique);
-        this.preferencesFile = getSharedPreferences("API-DEEPL", MODE_PRIVATE);
+
         final ImageButton btnPagePrincipale = findViewById(R.id.btnPagePrincipale);
         final ImageButton btnParametres = findViewById(R.id.btnParametres);
 
@@ -34,34 +30,35 @@ SharedPreferences preferencesFile;
             Intent intent = new Intent(HistoriqueActivity.this, MainActivity.class);
             HistoriqueActivity.this.startActivity(intent);
         });
+
         btnParametres.setOnClickListener(view -> {
             Intent intent = new Intent(HistoriqueActivity.this, ParametreActivity.class);
             HistoriqueActivity.this.startActivity(intent);
         });
+
         loadTraductions();
-        traductionAdapter = new TraductionAdapter(this,R.layout.sous_historique, traductions);
+        this.traductionAdapter = new TraductionAdapter(this,R.layout.sous_historique, this.traductions);
         ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(traductionAdapter);
+        listView.setAdapter(this.traductionAdapter);
 
 
     }
     public void loadTraductions() {
-        SharedPreferences preferencesFile = getSharedPreferences("API-DEEPL", MODE_PRIVATE);
+        SharedPreferences preferencesFile = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
         Traduction traduction;
-        /*
-        for (int i = 0; i < 10; i++) {
-            traduction = new Traduction(
-                    preferencesFile.getString("lang_source" + i, ""),
-                    preferencesFile.getString("lang_target" + i, "-1"),
-                    preferencesFile.getString("text_source" + i, "-1"),
-                    preferencesFile.getString("text_target" + i, "-1")
-            );
-            traductions.add(traduction);
+
+        for (int i = 0; i < preferencesFile.getInt("nbTransactions", 0); i++) {
+            String langueSource = preferencesFile.getString("historiqueLangueSource" + i, "");
+            String langueCible = preferencesFile.getString("historiqueLangueCible" + i, "");
+            String texteSource = preferencesFile.getString("historiqueTexteSource" + i, "");
+            String texteCible = preferencesFile.getString("historiqueTexteCible" + i, "");
+            traduction = new Traduction(langueSource, langueCible, texteSource, texteCible);
+            this.traductions.add(traduction);
+        }
 
 
 
-        }*/
-        //TODO
+
 
     }
 }

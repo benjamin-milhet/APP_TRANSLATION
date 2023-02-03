@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="383dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
@@ -32,10 +32,12 @@
                 android:layout_weight="1"
                 android:autoText="false"
                 android:background="@color/teal_700"
-                android:text=" Choix de la langue : "
-                android:textAlignment="viewStart"
+                android:text="  Choix de la langue : "
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinnerListeLangue"
@@ -52,7 +54,7 @@
             android:id="@+id/editTexteATraduire"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:background="@color/white"
+            android:background="@drawable/roundedcorner"
             android:ems="10"
             android:gravity="start|top"
             android:hint="Entrez le texte à traduire"
@@ -95,14 +97,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/teal_700"
-                android:text="Langue détectée :"
-                android:textColor="@color/white" />
+                android:text="  Langue détectée :"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/affichageLangueDetectee"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -114,7 +119,7 @@
             android:id="@+id/textViewTexteTraduit"
             android:layout_width="match_parent"
             android:layout_height="191dp"
-            android:background="@color/white" />
+            android:background="@drawable/roundedcorner" />
 
     </LinearLayout>
 

@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.milhet.translationapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TraductionAdapter extends ArrayAdapter<Traduction> {
 
@@ -52,8 +50,6 @@ int resource;
         textLangTarget.setText(traduction.getLang_target());
         textSource.setText(traduction.getText_source());
         textTarget.setText(traduction.getText_target());
-
-
 
         return view;
     }
