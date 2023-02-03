@@ -20,16 +20,20 @@ import org.json.JSONObject;
 
 import okhttp3.Response;
 
+/**
+ * Classe représentant l'activité des paramètres avec la gestion de la clé API DEEPL
+ * @author Milhet et Ghys
+ */
 public class ParametreActivity extends AppCompatActivity {
 
-    String token;
-    SharedPreferences preferencesFile;
-    ImageButton btnPagePrincipale;
-    ImageButton btnHistorique;
-    Button btnChargerClef;
-    EditText tokenEditText;
-    TextView idCaracUtiliser;
-    TextView idCaracTotal;
+    String token; // clé API DEEPL
+    SharedPreferences preferencesFile; // fichier de préférences
+    ImageButton btnPagePrincipale; // bouton pour retourner à la page principale
+    ImageButton btnHistorique; // bouton pour aller à l'historique
+    Button btnChargerClef; // bouton pour charger la clé API DEEPL
+    EditText tokenEditText; // champ pour entrer la clé API DEEPL
+    TextView idCaracUtiliser; // nombre de caractères utilisés
+    TextView idCaracTotal; // nombre de caractères total
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,12 +158,12 @@ public class ParametreActivity extends AppCompatActivity {
                                 toast.show();
                                 break;
 
-                                //par défaut, on affiche un toast avec le code d'erreur
+                            //par défaut, on affiche un toast avec le code d'erreur
                             default:
                                 //on laisse les boutons désactiver
                                 btnPagePrincipale.setEnabled(false);
                                 btnHistorique.setEnabled(false);
-                                    //le toast affiche "La clef saisie est incorrect"
+                                //le toast affiche "La clef saisie est incorrect"
                                 toast = Toast.makeText(getApplicationContext(), "La clef saisie est incorrect", Toast.LENGTH_SHORT);
                                 toast.show();
                                 break;
@@ -184,7 +188,6 @@ public class ParametreActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             //on parcours le tableau de l'API
-
                             for (int i = 0; i < response.length(); i++) {
                                 //on affiche les données dans les textView
                                 idCaracUtiliser.setText(String.valueOf(response.getInt("character_count")));

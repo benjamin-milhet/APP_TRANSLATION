@@ -14,12 +14,16 @@ import com.milhet.translationapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Classe représentant le lien entre la page historique et une traduction
+ * @author Milhet et Ghys
+ */
 public class TraductionAdapter extends ArrayAdapter<Traduction> {
 
 
-ArrayList<Traduction> historiquetraductions;
-Context context;
-int resource;
+    ArrayList<Traduction> historiquetraductions;
+    Context context;
+    int resource;
 
 
     public TraductionAdapter(Context context, int resource, ArrayList<Traduction> historiquetraductions) {

@@ -13,9 +13,14 @@ import com.milhet.translationapp.models.TraductionAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Classe représentant l'activité de l'historique
+ * @author Milhet et Ghys
+ */
 public class HistoriqueActivity extends AppCompatActivity {
-ArrayList<Traduction> traductions = new ArrayList<>();
-TraductionAdapter traductionAdapter;
+    ArrayList<Traduction> traductions = new ArrayList<>(); //liste de traductions
+    TraductionAdapter traductionAdapter; //adapter pour la liste
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,7 @@ TraductionAdapter traductionAdapter;
 
 
     }
+
     //chargement des traductions
     public void loadTraductions() {
         //on récupère les données du fichier de préférences

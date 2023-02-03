@@ -26,13 +26,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ * Classe représentant l'activité principale de l'application avec l'interface de traduction
+ * @author Milhet et Ghys
+ */
 public class MainActivity extends AppCompatActivity {
 
-    String token;
-    SharedPreferences preferencesFile;
-
-    ArrayList<Language> languages = new ArrayList<>();
+    String token; // clé API DEEPL
+    SharedPreferences preferencesFile; // fichier de préférences
+    ArrayList<Language> languages = new ArrayList<>(); // liste des langues
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
             MainActivity.this.startActivity(intent);
         });
-
-
-        //this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
 
         //ajout d'une langue vide pour le spinner de la langue source pour eviter de traduire sans que la langue aie été volontairement choisie par l'utilisateur
         this.languages.add(new Language("", ""));
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
             translate(textToTranslate, target_lang, language.getName(), textTraduit, detected_source_language);
 
-        // gestion des erreurs
+            // gestion des erreurs
         } else if (textToTranslate.isEmpty() && target_lang.isEmpty()) {
             textTraduit.setText("Veuillez entrer un texte à traduire et une langue de traduction");
             textTraduit.setTextColor(that.getColor(R.color.red));
