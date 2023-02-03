@@ -4,6 +4,6 @@
 [![made-with-java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://www.java.com)
 
 ## Membres du groupe
- - Clément GHYS [![GitHub followers](https://img.shields.io/github/followers/Naereen.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/clement-gh?tab=followers)
-  - Benjamin MILHET [![GitHub followers](https://img.shields.io/github/followers/Naereen.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/benjamin-milhet?tab=followers)
+ - Clément GHYS [![GitHub followers](https://img.shields.io/github/followers/clement-gh.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/clement-gh?tab=followers)
+  - Benjamin MILHET [![GitHub followers](https://img.shields.io/github/followers/benjamin-milhet.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/benjamin-milhet?tab=followers)
 
