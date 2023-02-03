@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class HistoriqueActivity extends AppCompatActivity {
 ArrayList<Traduction> traductions = new ArrayList<>();
 TraductionAdapter traductionAdapter;
-SharedPreferences preferencesFile;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
