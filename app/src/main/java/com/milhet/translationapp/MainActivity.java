@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this.token = "0da5a1b3-1637-fd73-e550-79b8954cf379:fx";
+
+        //ajout d'une langue vide pour le spinner de la langue source pour eviter de traduire sans que la langue aie été volontairement choisie par l'utilisateur
         this.languages.add(new Language("", ""));
         loadLanguage();
 
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadLanguage() {
         Context that = this;
-
+        //requete pour récupérer les langues
         AndroidNetworking.get("https://api-free.deepl.com/v2/languages")
                 .addHeaders("Authorization", "DeepL-Auth-Key " + this.token)
                 .build()
@@ -78,9 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            // on récupère le nom et le code de la langue
                             String lName;
                             String lCode;
 
+                            // on ajoute les langues dans la liste
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject languageI = response.getJSONObject(i);
                                 lName = languageI.getString("name");
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 languages.add(new Language(lCode, lName));
 
                             }
+                            // on ajoute la liste dans le spinner via un adapter
                             ArrayAdapter<Language> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_dropdown_item, languages);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             Spinner spinner = findViewById(R.id.spinnerListeLangue);
@@ -112,18 +117,23 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void translateButton(View view) {
         Context that = this;
-
+        // on récupère les éléments de la vue
+        // on récupère la langue sélectionnée dans le spinner
         Spinner spinner = findViewById(R.id.spinnerListeLangue);
         Language language = (Language) spinner.getSelectedItem();
+
+        //et le texte à traduire
         EditText textATraduire = findViewById(R.id.editTexteATraduire);
 
         //paramètres de la requête:
         String textToTranslate = textATraduire.getText().toString();
         String target_lang = language.getLanguage();
 
+        // on récupère les éléments de la vue
         TextView textTraduit = findViewById(R.id.textViewTexteTraduit);
         TextView detected_source_language = findViewById(R.id.affichageLangueDetectee);
 
+        // on vérifie que les champs ne sont pas vides
         if (!textToTranslate.isEmpty() && !target_lang.isEmpty()) {
             translate(textToTranslate, target_lang, language.getName(), textTraduit, detected_source_language);
 
@@ -146,19 +156,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void translate(String textToTranslate, String target_lang, String target_lang_full, TextView textTraduit, TextView detected_source_language) {
         Context that = this;
-
+        // requête pour traduire le texte
         AndroidNetworking.post("https://api-free.deepl.com/v2/translate")
-                .addHeaders("Authorization", "DeepL-Auth-Key " + token)
-                .addBodyParameter("text", textToTranslate)
-                .addBodyParameter("target_lang", target_lang)
+                .addHeaders("Authorization", "DeepL-Auth-Key " + token) // on ajoute le token dans les headers
+                .addBodyParameter("text", textToTranslate)  //on passe le texte à traduire
+                .addBodyParameter("target_lang", target_lang) //et la langue de traduction
                 .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
+                .getAsJSONObject(new JSONObjectRequestListener() { // on récupère la réponse sous forme de JSONObject
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            // on récupère la traduction et la langue détectée
                             String traduction = response.getJSONArray("translations")
                                     .getJSONObject(0)
                                     .getString("text");
+
+                            // on récupère le code de la langue détectée
                             String langueDetectee = response.getJSONArray("translations")
                                     .getJSONObject(0)
                                     .getString("detected_source_language");
@@ -167,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                             textTraduit.setText(traduction);
                             textTraduit.setTextColor(that.getColor(R.color.black));
 
-                            // On cherche le nom de la langue dans la liste des langues disponibles
+                            // On cherche le nom de la langue dans la liste des langues disponibles pour l'afficher
                             String detectedLanguageName = "";
                             for (Language language : languages) {
                                 if (language.getLanguage().equals(langueDetectee)) {
@@ -178,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                             // On affiche le nom de la langue dans le TextView
                             detected_source_language.setText(detectedLanguageName);
 
+                            // On sauvegarde la traduction dans l'historique
                             saveTraductions(detectedLanguageName, target_lang_full, textToTranslate, traduction);
 
 
@@ -194,18 +208,23 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    // fonction de sauvegarde de la traduction dans l'historique
     public void saveTraductions(String langueSource, String langueCible, String textSource, String textTraduit) {
+        // on récupère les préférences de l'historique
         SharedPreferences sharedPreferences = getSharedPreferences("historiqueLocal", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //on incrémente le nombre de traductions
         int nbTransactions = sharedPreferences.getInt("nbTransactions", 0);
 
+        // on sauvegarde les informations de la traduction
         for (int i = 0; i < nbTransactions; i++) {
             String langueSourceI = sharedPreferences.getString("historiqueLangueSource" + i, "");
             String langueCibleI = sharedPreferences.getString("historiqueLangueCible" + i, "");
             String textSourceI = sharedPreferences.getString("historiqueTexteSource" + i, "");
             String textTraduitI = sharedPreferences.getString("historiqueTexteCible" + i, "");
 
+            // on décale les traductions précédentes
             if (i < 9) {
                 editor.putString("historiqueLangueSource" + (i + 1), langueSourceI);
                 editor.putString("historiqueLangueCible" + (i + 1), langueCibleI);
@@ -214,13 +233,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // on sauvegarde la traduction actuelle
         editor.putString("historiqueLangueSource0", langueSource);
         editor.putString("historiqueLangueCible0", langueCible);
         editor.putString("historiqueTexteSource0", textSource);
         editor.putString("historiqueTexteCible0", textTraduit);
 
+        // on limite le nombre de traductions à 10
         nbTransactions = Math.min(nbTransactions + 1, 10);
 
+        // on sauvegarde le nombre de traductions
         editor.putInt("nbTransactions", nbTransactions);
         editor.apply();
     }

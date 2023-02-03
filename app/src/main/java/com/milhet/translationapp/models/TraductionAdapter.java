@@ -38,13 +38,13 @@ int resource;
         //getting the view
         View view = layoutInflater.inflate(resource, null, false);
 
+        //getting the view elements of the list from the view
         TextView textLangSource = view.findViewById(R.id.idLangueSource);
         TextView textLangTarget = view.findViewById(R.id.idLangueDetectee);
         TextView textSource = view.findViewById(R.id.idTextSource);
         TextView textTarget = view.findViewById(R.id.idTextTraduit);
 
-        //getting the view elements of the list from the view
-
+        //getting the hero of the specified position
         Traduction traduction = historiquetraductions.get(position);
         textLangSource.setText(traduction.getLang_source());
         textLangTarget.setText(traduction.getLang_target());

@@ -163,4 +163,5 @@
             app:tint="@color/bleu" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
