@@ -2,6 +2,8 @@ package com.milhet.translationapp.models;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
  * Classe permettant d'adapter un spinner en mettant une image et un texte
  * @author Milhet et Ghys
  */
+
 public class SpinnerAdapter extends ArrayAdapter<Language> {
     
     final private Context context; //Permet de récupérer le contexte de l'activité
@@ -58,8 +61,11 @@ public class SpinnerAdapter extends ArrayAdapter<Language> {
             Resources res = context.getResources(); //On récupère les ressources
             String drawableName = this.languages.get(position).getLanguage().toLowerCase(); //On récupère le nom de l'image
             int resId = res.getIdentifier(drawableName, "drawable", context.getPackageName()); //On récupère l'id de l'image
-            Drawable drawable = res.getDrawable(resId); //On récupère l'image
-            flag.setImageDrawable(drawable); //On met l'image dans le widget image
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 4;
+            Bitmap bitmap = BitmapFactory.decodeResource(res, resId, options);
+            flag.setImageBitmap(bitmap);
+
         }
 
         return row; //On retourne la vue de la ligne
