@@ -17,7 +17,7 @@ Ce projet a pour but de réaliser une application android de traduction en utili
 Pour ce projet, nous nous sommes divisés les taches en deux, une personne s'est occupée de la page de traduction et l'autre personne s'est occupée de la page historique et paramètre. Au fur et à mesure de chaque implementation, nous avons vérifié l'ensemble des fonctionnalités.
 
 ## Amélioration réalisée
-Nous avons effectué une amélioration qui l'ajout des drapeaux des langues de traduction dans la spinner afin de retrouver plus facilement une langue.
+Nous avons effectué une amélioration qui l'ajout des drapeaux des langues de traduction dans la spinner afin de retrouver plus facilement une langue. Pour pouvoir utiliser cette version avec l'amélioration, une version de l'API de minimun 26 est nécessaire et nous vous conseillons une version de l'API de 30.
 
 ## Rendu final
 
