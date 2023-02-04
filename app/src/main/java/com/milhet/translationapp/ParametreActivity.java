@@ -75,19 +75,7 @@ public class ParametreActivity extends AppCompatActivity {
             ParametreActivity.this.startActivity(intent);
         });
 
-        this.btnChargerClef.setOnClickListener(view -> {
-
-            if (this.token.equals("-1")) {
-                this.btnPagePrincipale.setEnabled(false);
-                this.btnHistorique.setEnabled(false);
-            } else {
-                this.btnPagePrincipale.setEnabled(true);
-                this.btnHistorique.setEnabled(true);
-            }
-
-            this.verifierConnection(tokenEditText.getText().toString());
-            this.recupererDataAPI();
-        });
+        this.btnChargerClef.setOnClickListener(view -> this.verifierConnection(tokenEditText.getText().toString()));
 
         //verifier la connection
         this.verifierConnection(this.token);
@@ -117,6 +105,17 @@ public class ParametreActivity extends AppCompatActivity {
 
                                 //on enregistre le token dans la variable token du fichier de préférence
                                 token = preferencesFile.getString("token", "-1");
+
+                                if (token.equals("-1")) {
+                                    btnPagePrincipale.setEnabled(false);
+                                    btnHistorique.setEnabled(false);
+                                } else {
+                                    btnPagePrincipale.setEnabled(true);
+                                    btnHistorique.setEnabled(true);
+                                }
+
+                                recupererDataAPI();
+
 
                                 //le toast affiche "Connexion reussi"
                                 toast = Toast.makeText(getApplicationContext(), "Connexion reussi", Toast.LENGTH_SHORT);
