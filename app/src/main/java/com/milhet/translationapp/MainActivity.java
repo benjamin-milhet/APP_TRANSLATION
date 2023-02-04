@@ -19,7 +19,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.milhet.translationapp.models.Language;
-import com.milhet.translationapp.models.SpinnerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                             // on ajoute la liste dans le spinner via un adapter
-                            SpinnerAdapter adapter = new SpinnerAdapter(that, R.layout.sous_spinner, languages);
-                            adapter.setDropDownViewResource(R.layout.sous_spinner);
-
-                            spinnerListeLangue.setAdapter(adapter);
+                            ArrayAdapter<Language> adapter = new ArrayAdapter<>(that, android.R.layout.simple_spinner_dropdown_item, languages);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            Spinner spinner = findViewById(R.id.spinnerListeLangue);
+                            spinner.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
