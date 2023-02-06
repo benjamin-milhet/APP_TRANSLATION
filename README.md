@@ -1,4 +1,4 @@
-# GHYS_MILHET_PROJET_TRANSLATION
+# APP_TRANSLATION
 
 [![Android CI](https://github.com/benjamin-milhet/GHYS_MILHET_PROJET_TRANSLATION/actions/workflows/android.yml/badge.svg)](https://github.com/benjamin-milhet/GHYS_MILHET_PROJET_TRANSLATION/actions/workflows/android.yml)
 [![made-with-java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://www.java.com)
